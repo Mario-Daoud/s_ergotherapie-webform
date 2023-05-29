@@ -1,0 +1,114 @@
+﻿@model ergo_web2_2023.Areas.Administrator.ViewModels.SubquestionEditVM
+<link rel="stylesheet" href="~/css/editAndCreate.css">
+@{
+    ViewData["Title"] = "EditSubquestion";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<div class="container align-content-center">
+
+    <h1>Edit Subquestion</h1>
+
+    <br />
+    <div class="scrollable-container">
+        <div class="row">
+            <div class="col-4"></div>
+
+            <div class="col-md-4">
+                <form asp-action="EditSubquestion" id="createSubquestionForm">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Id" class="control-label" hidden></label>
+                        <input asp-for="Id" class="form-control" hidden />
+                        <span asp-validation-for="Id" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SubQuestionId" class="control-label"></label>
+                        <input asp-for="SubQuestionId" class="form-control" hidden />
+                        <select asp-for="SubQuestionId" class="form-control" disabled
+                                asp-items="@Model.Subvragen">
+                        </select>
+                        <span asp-validation-for="SubQuestionId" class="text-danger"></span>
+                    </div>
+                    <br />
+
+                    <div class="form-group">
+                        <label asp-for="QuestionId" class="control-label"></label>
+                        <select asp-for="QuestionId" id="questionDropdown" class="form-control"
+                                asp-items="@Model.Vragen">
+                        </select>
+                        <span asp-validation-for="QuestionId" class="text-danger"></span>
+                    </div>
+                    <br />
+
+                    <div class="form-group">
+                        <label asp-for="OptionId" class="control-label"></label>
+
+                        <select asp-for="OptionId" id="optionsDropdown" class="form-control"
+                                asp-items="@Model.Options">
+                            <option>Please select</option>
+                        </select>
+                        <span asp-validation-for="OptionId" class="text-danger"></span>
+                    </div>
+
+                    <br />
+
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <p class="text-danger">@Html.ValidationMessage("Vragen")</p>
+                    </div>
+                </form>
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+            function loadOptions() {
+                var selectedQuestionId = $('#questionDropdown').val();
+                var optionsDropdown = $('#optionsDropdown');
+
+                if (selectedQuestionId !== '') {
+                    optionsDropdown.prop('disabled', false);
+
+                    $.ajax({
+                        url: '@Url.Action("GetOptions", "Subquestion")',
+                        type: 'GET',
+                        data: { questionId: selectedQuestionId },
+                        success: function (data) {
+                            optionsDropdown.empty();
+
+                            if (data.length === 0) {
+                                optionsDropdown.append($('<option></option>').val(0).text('Geen Opties'));
+                            }
+
+                            $.each(data, function (index, option) {
+                                optionsDropdown.append($('<option></option>').val(option.optionId).text(option.optiontext));
+                            });
+                        },
+                        error: function () {
+                            console.log('Failed to retrieve options for the selected question.');
+                        }
+                    });
+                } else {
+                    optionsDropdown.empty().prop('disabled', true);
+                }
+            }
+
+            $('#questionDropdown').on('change', function () {
+                loadOptions();
+            });
+
+            loadOptions();
+        });
+    </script>
+}

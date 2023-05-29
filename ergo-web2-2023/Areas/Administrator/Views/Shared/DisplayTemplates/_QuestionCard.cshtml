@@ -1,0 +1,16 @@
+﻿@model ergo_web2_2023.Areas.Administrator.ViewModels.QuestionVM;
+
+@if (Model != null)
+{
+    <div class="col-12 mb-2">
+        <div class="cardItem ">
+            <div class="listItem card-body">
+                <h5 class="card-title listItem mb-1 txtQuestionOverflow">@Model.Title</h5>
+                @if (Model.Description != null)
+                {
+                    <p class="listItem txtQuestionOverflow">Desc.: @Model.Description</p>
+                }
+            </div>
+        </div>
+    </div>
+}

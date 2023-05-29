@@ -1,0 +1,9 @@
+appsettings
+appsettings.json
+/appsettings
+**/appsettings.json
+
+appsettings.Development
+appsettings.Development.json
+/appsettings.Development
+**/appsettings.Development.json

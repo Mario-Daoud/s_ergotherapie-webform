@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ergo_web2_2023.ViewModels.QuestionsVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div>
+
+
+    @foreach (var item in Model)
+    {
+        <table class="question_table">
+
+            <tr>
+                <th class="question_title" colspan="2">
+                    @Html.DisplayFor(modelItem => item.QuestionId)
+                    @Html.DisplayFor(modelItem => item.Title)
+                </th>
+            </tr>
+            <tr>
+                <td class="question_field">
+
+                    <div class="description_field">
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </div>
+                    @if (item.Hint != null)
+                    {
+                        <div class="description_field hint">
+                            <img src="~/images/tooltip_icon.png" class="hint_image">
+                            <span class="hint_text">@Html.DisplayFor(modelItem => item.Hint)</span>
+                        </div>
+                    }
+                    @if (item.Type == ergo_web2_2023.Models.Enums.QuestionType.open_question)
+                    {
+                        <div class="">
+                            @foreach (var option in item.QuestionOptions)
+                            {
+
+                                <div class="">
+                                    <label>
+                                        <input type="checkbox" name="option" value="option.OptionId" />
+                                        @Html.DisplayFor(modelItem => option.OptionText)
+                                    </label>
+                                </div>
+
+                            }
+                        </div>
+                    }
+                </td>
+                <td class="textarea_field">
+                    <textarea></textarea>
+                </td>
+            </tr>
+
+
+        </table>
+
+    }
+
+</div>

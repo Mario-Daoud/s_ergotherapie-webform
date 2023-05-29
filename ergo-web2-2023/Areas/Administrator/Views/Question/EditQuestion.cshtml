@@ -1,0 +1,103 @@
+﻿@model ergo_web2_2023.Areas.Administrator.ViewModels.QuestionEditVM
+@using ergo_web2_2023.Models.Enums;
+<link rel="stylesheet" href="~/css/editAndCreate.css">
+
+@{
+    ViewData["Title"] = "EditQuestion";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+    var questionTypes = Enum.GetValues(typeof(QuestionType)).Cast<QuestionType>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() });
+}
+<div class="container align-content-center">
+
+    <h1>Edit Question</h1>
+
+    <br />
+    <div class="scrollable-container">
+        <div class="row">
+            <div class="col-4"></div>
+
+            <div class="col-md-4">
+                <form asp-action="EditQuestion">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="QuestionId" class="control-label"></label>
+                        <input asp-for="QuestionId" class="form-control" readonly />
+                        <span asp-validation-for="QuestionId" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <br />
+
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <br />
+
+                    <div class="form-group">
+                        <label asp-for="Type" class="control-label"></label>
+                        <select asp-for="Type" id="typeDropdown" class="form-control" asp-items="questionTypes"></select>
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label asp-for="Hint" class="control-label"></label>
+                        <input asp-for="Hint" class="form-control" />
+                        <span asp-validation-for="Hint" class="text-danger"></span>
+                    </div>
+                    <br />
+
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+                <div class="text-center" id="optionBtn">
+                    @if (Model.Type == 2)
+                    {
+                        <div class="btn">
+                            <a class="btn" asp-action="AddOptions" asp-route-id="@Model.QuestionId">Add Options</a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+            function loadOptions() {
+                var selectedType = $('#typeDropdown').val();
+                var optionBtn = $('#optionBtn');
+
+                if (selectedType === '2') {
+                    optionBtn.html('<div class="btn"><a class="btn" href="'
+                        + '@Url.Action("AddOptions", new { id = Model.QuestionId })'
+                        + '">Add Options</a></div>');
+                } else {
+                    optionBtn.empty();
+                }
+            }
+
+            $('#typeDropdown').on('change', function () {
+                loadOptions();
+            });
+
+            loadOptions();
+        });
+    </script>
+}

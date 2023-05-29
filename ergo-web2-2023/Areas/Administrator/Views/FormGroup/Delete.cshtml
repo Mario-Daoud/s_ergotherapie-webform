@@ -1,0 +1,44 @@
+﻿@model ergo_web2_2023.Areas.Administrator.ViewModels.FormGroupVM
+<link rel="stylesheet" href="~/css/editAndCreate.css">
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<div class="container align-content-center">
+    <h1>Delete this formgroup?</h1>
+    <br />
+    <div class="scrollable-container">
+        <div class="row">
+            <div class="col-4"></div>
+
+            <div class="col-md-4">
+                @using (Html.BeginForm("Delete", "FormGroup", new { id = Model.GroupId }, FormMethod.Post))
+                {
+                    <div>
+                        <label class="control-label">Title</label>
+                        <input value="@Model.Title" class="form-control" readonly />
+                    </div>
+                    <div>
+                        <label class="control-label">Group Order</label>
+                        <input value="@Model.GroupOrder" class="form-control" readonly />
+                    </div>
+
+                    @Html.AntiForgeryToken()
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-danger delete">Delete</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" class="btn cancel" onclick="location.href='@Url.Action("ListAllGroups")'">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+</div>

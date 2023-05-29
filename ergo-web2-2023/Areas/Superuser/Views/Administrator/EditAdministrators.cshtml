@@ -1,0 +1,201 @@
+﻿@using ergo_web2_2023.Areas.Superuser.ViewModels;
+@model IEnumerable<AdministratorVM>
+
+@{
+    ViewData["Title"] = "Administrator Account Management";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<head>
+    <title>Accounts</title>
+    <link rel="stylesheet" href="~/css/accounts.css" />
+</head>
+
+<div id="content-body">
+    <div class="row" id="page">
+        <div class="col-md-1"></div>
+
+        <div class="col-md-5" style="margin-bottom: 25px;">
+            <h5>Administrator Accounts</h5>
+            <hr />
+            <ul class="nav nav-pills" id="adminlist">
+                @foreach (var u in Model.OrderBy(u => u.UserName))
+                {
+                    <li class="nav-item userlistItem w-100">
+                        <a href="#" data-userid="@u.Id" class="nav-link user-link"> @u.UserName</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-5">
+            <h5>Edit Credentials</h5>
+            <hr />
+            <form asp-controller="Administrator" asp-action="EditAdministrators" method="post" class="row g-3">
+                <div class="form-floating">
+                    <input class="form-control" type="text" asp-for="UserName" name="Username" disabled>
+                    <label class="form-label text-dark" asp-for="UserName">Username</label>
+                </div>
+                <div class="form-floating">
+                    <input class="form-control" type="email" asp-for="Email" name="Email">
+                    <label class="form-label text-dark" asp-for="Email">Email</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" class="form-control" asp-for="Phone" name="Phone" />
+                    <label asp-for="Phone" class="form-label text-dark">Phone number</label>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="Password" type="password" class="form-control" name="Password" />
+                    <label asp-for="Password" class="form-label text-dark">Password</label>
+                </div>
+                <div class="form-check m-2">
+                    <input class="form-check-input" type="checkbox" value=true name="IsSuperUser" for="IsSuperUser">
+                    <label class="form-check-label" for="IsSuperUser">
+                        Superuser
+                    </label>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <p style="margin: 2px"></p>
+                    <button type="button" class="btn btn-primary btn-delete" style="background-color: red; border-color: red;">Delete</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-md-1"></div>
+
+    </div>
+    <div class="container">
+        <div class="row justify-content-start">
+            @foreach (var item in Model.OrderBy(u => u.UserName))
+            {
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.UserName)</h5>
+                            <div class="card-text">
+                                <div class="mb-2">
+                                    <span class="fw-bold">Email:</span> @Html.DisplayFor(modelItem => item.Email)
+                                </div>
+                                <div class="mb-2">
+                                    <span class="fw-bold">Phone:</span> @Html.DisplayFor(modelItem => item.Phone)
+                                </div>
+                                <div class="mb-2">
+                                    <span class="fw-bold">Role:</span>
+                                    @if (item.IsSuperUser)
+                                    {
+                                        <span>Superuser</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Administrator</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<style>
+    .container {
+        overflow-y: scroll;
+        max-height: 500px;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .card-text {
+        font-size: 1rem;
+    }
+
+    .fw-bold {
+        font-weight: bold;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(function () {
+        $('.user-link').on('click', function (e) {
+            e.preventDefault();
+            var userId = $(this).data('userid');
+            $.ajax({
+                url: '@Url.Action("GetUserById", "Administrator", new {area = "Superuser"})/' + userId,
+                method: 'GET',
+                success: function (data) {
+                    console.log('output');
+                    $('input[name="Id"]').val(data.id);
+                    $('input[name="Username"]').val(data.username);
+                    $('input[name="Email"]').val(data.email);
+                    $('input[name="Phone"]').val(data.phoneNumber);
+                    $('input[name="Password"]').val("");
+                    $('input[name="IsSuperUser"]').attr('checked', data.isSuperUser);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    var userId = "";
+
+    $(function () {
+        $('.user-link').on('click', function (e) {
+            e.preventDefault();
+            userId = $(this).data('userid');
+        });
+    });
+
+    $(function () {
+        $('.btn-delete').on('click', function (e) {
+            if (userId !== "") {
+                getUserById(userId).then(function (user) {
+                    if (confirm("Are you sure you want to delete " + user.username + "?")) {
+                        removeElements();//dit zorgt ervoor dat de admin meteen verdwijnt in de lijst. Hierzonder moet je eerst nog eens refreshen
+                        $.ajax({
+                            url: '@Url.Action("DeleteUser", "Administrator", new {area = "Superuser"})/' + userId
+                        });
+                    }
+                }).catch(function (error) {
+                    console.error("Error:", error);
+                });
+            }
+        });
+    });
+
+    function getUserById(userId) {
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                url: '@Url.Action("GetUserById", "Administrator", new {area = "Superuser"})/' + userId,
+                method: 'GET',
+                success: function (data) {
+                    resolve(data);
+                },
+                error: function (error) {
+                    reject(error);
+                }
+            });
+        });
+    }
+
+    function removeElements() {
+        document.querySelector(`[data-userid='${userId}']`).parentElement.remove();
+        var inputs = document.getElementsByTagName("input");
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].value = "";
+        }
+    }
+</script>

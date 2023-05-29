@@ -1,0 +1,44 @@
+﻿@model ergo_web2_2023.Areas.Administrator.ViewModels.FormVM
+<link rel="stylesheet" href="~/css/editAndCreate.css">
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<div class="container align-content-center">
+    <h1>Delete this form?</h1>
+    <br />
+    <div class="scrollable-container">
+        <div class="row">
+            <div class="col-4"></div>
+
+            <div class="col-md-4">
+                @using (Html.BeginForm("Delete", "Form", new { id = Model.FormId }, FormMethod.Post))
+                {
+                    <div>
+                        <label class="control-label">Title</label>
+                        <input value="@Model.Title" class="form-control" readonly />
+                    </div>
+                    <div>
+                        <label class="control-label">Description</label>
+                        <input value="@Model.Description" class="form-control" readonly />
+                    </div>
+
+                    @Html.AntiForgeryToken()
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-danger delete">Delete</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" class="btn cancel" onclick="location.href='@Url.Action("ListAllForms")'">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+</div>

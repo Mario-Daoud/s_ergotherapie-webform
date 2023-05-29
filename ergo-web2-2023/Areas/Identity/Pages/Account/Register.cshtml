@@ -1,0 +1,69 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_LayoutCustom.cshtml";
+}
+
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="~/css/register.css" />
+</head>
+
+
+<div class="gen-container">
+    <div class="logo-container">
+        <img src="~/images/LogoVIVES.png" alt="logo vives" height="100px">
+        <img src="~/images/LogoZUYD.png" alt="logo zuyd" height="100px">
+    </div>
+    <div class="register-container">
+        <h1>Register</h1>
+        <p>for administrators</p>
+    </div>
+    <div class="form-container">
+        <div class="card">
+            <section>
+                <form id="account" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label for="Input_Username" class="form-label">Username</label>
+                        <input id="Input_Username" asp-for="Input.Username" class="form-control" autocomplete="username" aria-required="true" />
+                        <span asp-validation-for="Input.Username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="Input_Email" class="form-label">E-mail</label>
+                        <input id="Input_Email" asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="Input_Password" class="form-label">Password</label>
+                        <input id="Input_Password" asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="Input_ConfirmPassword" class="form-label">Confirm password</label>
+                        <input id="Input_ConfirmPassword" asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.ProfilePicture" class="form-label text-black"></label>
+                        <input type="file" asp-for="Input.ProfilePicture" class="form-control" accept="image/*" />
+                        <span asp-validation-for="Input.ProfilePicture" class="text-danger"></span>
+                    </div>
+                    <div id="register-button">
+                        <button id="register-submit" type="submit" class="btn btn-lg btn-primary">Register</button>
+                    </div>
+                    <div id="forgot">
+                        <p>
+                            <a asp-page="./Login">Already have an account? Login</a>
+                        </p>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,137 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    padding-bottom: 60px;
+    background-color: white;
+    color: black;
+}
+
+.nav-item {
+    font-size: 1.1em;
+}
+
+.listItem {
+    text-decoration: none;
+    color: black;
+}
+
+.headerItem {
+    margin-right: 12px;
+}
+
+.listItem:hover {
+    text-decoration: none;
+    color: black;
+}
+
+
+footer {   
+    color: gray;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#themeIcon {
+    width: 25px;
+    cursor: pointer;
+    margin-left: 15px;
+    margin-right: 5px;
+}
+
+.addQuestionToFormContainer {
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.txtQuestionOverflow {
+    display: -webkit-box;
+    width: 200px;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+#addQuestionToFormButton {
+    vertical-align: middle;
+}
+
+.cardItem {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.question_table, .question_title, .question_field {
+    border: 1px solid;
+    border-color: #4472c4;
+}
+
+.logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.menuBarIcon {
+    background-image: url('../images/menuIcon.png');
+}
+
+#google_translate_element {
+    margin-right: 25px;
+}
+
+#google_translate_element select {
+    border-radius: 3px;
+    padding: 6px 8px
+}
+
+
+#adminNavGrid .card-header {
+    background-color: #d63519;
+
+}
+
+#adminNavGrid {
+    color: white;
+}
+ 
+#adminNavGrid a {
+    color: black !important;
+}
+
+#adminNavGrid .card {
+    border: 1px solid gray;
+}
+
+#vragenLijstButton {
+    position: absolute;
+    top: -12px;
+    right: -3px;
+    width: 40px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 25px;
+    font-size: 1.1rem;
+}

@@ -1,0 +1,81 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using ergo_web2_2023.Data
+@using ergo_web2_2023.Data.UserDB
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject UserService userService
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ergo_web2_2023</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+</head>
+<body>
+
+    <!-- list for mobile -->
+    <div id="dropdown-list" class="dropdown-menu w-100">
+        <a href="/" class="btn">Homepage</a>
+        <a class="btn" asp-area="Administrator" asp-controller="Form" asp-action="ListAllForms">Forms</a>
+        <a class="btn" asp-area="Administrator" asp-controller="Question" asp-action="ListAllQuestions">Questions</a>
+        <a class="btn" asp-area="Administrator" asp-controller="Subquestion" asp-action="ListAllSubquestions">Subquestions</a>
+        @if (User.IsInRole("Superuser"))
+        {
+            <a class="btn" asp-area="Superuser" asp-controller="Administrator" asp-action="EditAdministrators">Users</a>
+        }
+        <a class="btn" asp-area="Identity" asp-page="/Account/Manage/Index">My Account</a>
+        <a href="/Identity/Account/Logout?returnUrl=%2FHome%2FIndex" class="btn">Logout</a>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-3" id="left-bar-container">
+                <div id="left-bar">
+                    <div id="images-container">
+                        <a asp-area="Administrator" asp-controller="Home" asp-action="Index"><img id="logo" src="~/images/LogoZUYD-black.png" alt="logo zuyd" /></a>
+
+                        @{
+                            var u = await userService.GetUserImageAsync(User);
+
+                            var image = u == null ? "/images/profile_picture.jpg" : u;
+                        }
+                        <img id="pfp" src=@image alt="profile picture" />
+                        <p id="username">
+                            @User.Identity?.Name
+                        </p>
+                    </div>
+                    <div id="btn-conainer" class="scrollable">
+                        <div id="btn-list">
+                            <a class="btn" asp-area="Administrator" asp-controller="Form" asp-action="ListAllForms">Forms</a>
+                            <a class="btn" asp-area="Administrator" asp-controller="FormGroup" asp-action="ListAllGroups">Form Groups</a>
+                            <a class="btn" asp-area="Administrator" asp-controller="Question" asp-action="ListAllQuestions">Questions</a>
+                            <a class="btn" asp-area="Administrator" asp-controller="Subquestion" asp-action="ListAllSubquestions">Subquestions</a>
+                            @if (User.IsInRole("Superuser"))
+                            {
+                                <a class="btn" asp-area="Superuser" asp-controller="Administrator" asp-action="EditAdministrators">Users</a>
+                            }
+                            <a class="btn" asp-area="Identity" asp-page="/Account/Manage/Index">Account</a>
+                        </div>
+                        <a href="/" class="btn" id="homepage-btn">Homepage</a>
+                        <a href="/Identity/Account/Logout?returnUrl=%2FHome%2FIndex" class="btn" id="logout-btn">Log out</a>
+                    </div>
+                </div>
+                <div id="left-bar-background"></div>
+            </div>
+            <div class="renderBody col-md-9 col-sm-12">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

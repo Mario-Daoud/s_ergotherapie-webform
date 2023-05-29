@@ -1,0 +1,67 @@
+﻿.container {
+    margin-top: 10%;
+    height: 100vh;
+}
+
+.scrollable-container {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+h1 {
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: red;
+    width: 100%;
+    border: none;
+}
+
+#left-bar-background {
+    background-color: #f2f1ef;
+}
+
+#newOptionText {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.option {
+    padding: 10px;
+    margin-bottom: 6px;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid rgba(0,0,0,.125);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.option-text {
+    flex: 1;
+    width: 70%;
+}
+
+.option-delete {
+    background-color: #f2f1ef;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.form-actions {
+    margin-top: 15px;
+}
+
+.cancel {
+    color:white;
+    background-color:gray;
+}
+
+.cancel, .delete {
+    width: 100%;
+}

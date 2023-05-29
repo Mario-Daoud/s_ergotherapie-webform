@@ -1,0 +1,44 @@
+﻿@model ergo_web2_2023.Models.Entities.FormQuestion
+
+@{
+    ViewData["Title"] = "AddQuestionToForm";
+    Layout = "~/Areas/Administrator/Views/Shared/_LayoutAdministrator.cshtml";
+}
+<h1>Add question to form</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddQuestionToForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FormId" class="control-label"></label>
+                <input asp-for="FormId" class="form-control" readonly/>
+                <span asp-validation-for="FormId" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label asp-for="QuestionId" class="control-label"></label>
+                <input asp-for="QuestionId" class="form-control" />
+                <span asp-validation-for="QuestionId" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label asp-for="GroupId" class="control-label"></label>
+                <input asp-for="GroupId" class="form-control" />
+                <span asp-validation-for="GroupId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br/>
+<div>
+    <a asp-action="ListAllForms">Cancel</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

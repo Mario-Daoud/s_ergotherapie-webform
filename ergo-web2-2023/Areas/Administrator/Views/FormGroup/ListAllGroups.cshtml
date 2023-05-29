@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ergo_web2_2023.Areas.Administrator.ViewModels.FormGroupVM>
+
+@{
+    ViewData["Title"] = "ListAllGroups";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<div id="quick-actions">
+    <h3>Quick Actions</h3>
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-3 mb-2" onclick="location.href='@Url.Action("CreateFormGroup", "FormGroup", new { area = "Administrator" })';" style="cursor: pointer;">
+            <div class="card text-center">
+                <div class="card-body fw-bold">
+                    <p>
+                        <h3 class="plus">+</h3>
+                        <span>Create Form Group</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="content">
+    <div class="content-title">
+        <h3>All Form Groups</h3>
+    </div>
+    <div class="row content-cards">
+        @foreach (var item in Model)
+        {
+            <div class="col-12 col-md-6 col-lg-3 mb-2">
+                <div class="card content-card">
+                    <div class="card-body">
+                        <h5 class="grouptitle">@Html.DisplayFor(modelItem => item.Title)</h5>
+                        <p class="groupOrder"></p>
+                           <p class="description">Order: @Html.DisplayFor(modelItem => item.GroupOrder)</p>
+                    </div>
+                    <div class="actions">
+                        <a asp-action="EditGroup" asp-route-id="@item.GroupId"><img height="30px" src="~/images/edit.png" /></a> |
+                        <a asp-action="Delete" asp-route-id="@item.GroupId"><img height="30px" src="~/images/delete.png" /></a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

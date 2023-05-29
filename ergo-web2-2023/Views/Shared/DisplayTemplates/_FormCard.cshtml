@@ -1,0 +1,15 @@
+﻿@model ergo_web2_2023.Areas.Administrator.ViewModels.FormVM
+
+@if (Model != null)
+{
+    <form class="fillinform-form">
+        <div class="cardItem">
+            <div class="listItem card-body">
+                <h2 class="card-title">@Model.Title</h2>
+                <p class="card-description">@Model.Description</p>
+                <button type="submit" class="btn-primary" asp-action="FillInForm" asp-controller="Form" asp-route-id=@Model.FormId>Fill in form</button>
+            </div>
+        </div>
+    </form>
+}
+

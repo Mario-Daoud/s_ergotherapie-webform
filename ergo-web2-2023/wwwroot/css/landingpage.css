@@ -1,0 +1,118 @@
+
+.hero--container {
+    height: 75vh;
+    background: linear-gradient(to bottom, rgba(0,0,0, 0.3), rgba(0,0,0, 0.4)), url("/images/heroImage.jpg") center center;
+    background-size: cover;
+    padding-inline: 8rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.navigation {
+    position: absolute;
+    top: 25px;
+    right: 8rem;
+}
+
+.navigation {
+    display: flex;
+}
+
+.white-bold::before {
+    content: '';
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    background-color: red;
+    z-index: -1;
+    transition: transform 300ms ease-in-out;
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+.white-bold:hover::before,
+.white-bold:focus::before {
+    transform: scaleX(1);
+}
+
+.white-bold {
+    color: white !important;
+    font-weight: 500;
+    font-size: 1em;
+    background-color: #0d6efd;
+    z-index: 1;
+    border-radius: 0px;
+}
+
+
+.listItem {
+    text-decoration: none !important;
+}
+
+.hero--content {
+    padding-block: 5rem;
+}
+
+.hero--content a {
+    padding: 15px 15px 15px 15px;
+    border-radius: 15px;
+}
+
+.hero--content-title {
+    font-weight: 700;
+    color: white;
+    width: 20ch;
+    padding-bottom: 1.125rem;
+    letter-spacing: 1px;
+    font-size: 60px
+}
+
+.hero--content-copywrite {
+    color: white;
+    width: 30ch;
+    letter-spacing: 0.7px;
+    font-size: 1.2rem;
+    padding-bottom: 2rem;
+    text-align: justify;
+}
+
+.samenwerking--container {
+    padding-inline: 8rem;
+    padding-block: 2rem;
+}
+
+.samenwerking-content {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+}
+
+.samenwerking-content > img {
+    height: 7rem;
+    width: auto;
+    margin-bottom: 1.125rem;
+}
+
+.informatie--container {
+    background: ghostwhite;
+    padding-inline: 8rem;
+    padding-block: 3rem;
+}
+
+.informatie--container > p {
+    text-align: justify;
+}
+
+.section-title {
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+footer {
+    background-color: #121212;
+    color: lightgray !important;
+    padding: 35px 0 35px 0;
+}

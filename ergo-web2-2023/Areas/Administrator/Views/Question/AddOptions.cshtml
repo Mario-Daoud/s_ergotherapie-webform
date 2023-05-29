@@ -1,0 +1,55 @@
+﻿@using ergo_web2_2023.Areas.Administrator.ViewModels
+@model ergo_web2_2023.Areas.Administrator.ViewModels.OptionsVM
+<link rel="stylesheet" href="~/css/editAndCreate.css">
+
+@{
+    ViewData["Title"] = "EditQuestion";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<div class="container align-content-center">
+    <h1>Add Options</h1>
+
+    <br />
+    <div class="row container-row">
+        <div class="col-4"></div>
+        <div class="col-md-4">
+
+            <input type="text" id="newOptionText" />
+            <button class="btn btn-primary mb-5" onclick="insertNewOption()">Insert New Option</button>
+            <div class="scrollable-container">
+
+                @foreach (var item in Model.Options)
+                {
+                    <div class="option">
+                        <div class="listItem option-text">
+                            @Html.DisplayFor(modelItem => item.Optiontext)
+                        </div>
+                        <div class="option-delete">
+                            <a href="@Url.Action("DeleteOption", new { optionId = item.OptionId, questionId = item.QuestionId })">
+                                <img height="30px" src="~/images/delete.png" />
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+    {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<script>
+    function insertNewOption() {
+        const questionId = @Model.QuestionId; // retrieve the questionId from the Model
+        const newOptionText = document.getElementById('newOptionText').value;
+        const url = `/Administrator/Question/InsertNewOption?questionId=${questionId}&optionText=${newOptionText}`;
+        window.location.href = url;
+    }
+</script>

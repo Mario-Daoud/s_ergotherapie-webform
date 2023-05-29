@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using ergo_web2_2023.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<header class="hero--container">
+    <nav class="navigation">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <a class="btn white-bold" asp-area="Administrator" asp-page="/Administrator/Home/Index" title="Admin page">Administrator Page</a>
+        }
+        else
+        {
+            <a class="btn white-bold" asp-area="Identity" asp-page="/Account/Login">Log in</a>
+        }
+    </nav>
+
+
+    <div class="hero--content">
+        <h1 class="hero--content-title">Genereer formulieren die voor u passen</h1>
+        <p class="hero--content-copywrite">
+            Maak in enkele minuten
+            op <strong>maat gemaakte formulieren </strong>
+            met onze online formulier generator
+        </p>
+        <a class="btn white-bold" id="generateButton" asp-action="Forms" asp-controller="Home">Genereer een formulier</a>
+    </div>
+</header>
+
+<section class="samenwerking--container">
+    <h2 class="section-title">Samenwerking tussen</h2>
+    <div class="samenwerking-content">
+        <img src="~/images/LogoVIVES.png" alt="Logo van Hogeschool VIVES">
+        <img src="~/images/LogoZUYD.png" alt="Logo van Hogeschool ZUYD">
+    </div>
+</section>
+
+<section class="informatie--container">
+    <h2 class="section-title">Ergotherapieformulieren op maat</h2>
+    <p>
+        Het goed analyseren van het dagelijks handelen is een belangrijke essentiële vaardigheid voor de ergotherapeut. Hier vind je verschillende formulieren terug die de stappen bevatten om het redeneerproces van de ergotherapeut te ondersteunen en de wisselwerking tussen de persoon, de activiteit en de omgeving weer te geven. Een formulier kan gebruikt worden in diverse fases van het ergotherapeutisch proces (inventarisatie en analyse / opstellen en uitvoeren plan van aanpak / evaluatie, afronding en vervolg). Door keuzes te maken in het formulier, op basis van de onderdelen die binnen je eigen situatie van toepassing zijn, kan je gerichter inzicht verwerven in de mogelijheden bij de uitvoer van de activiteit en de strategieën die iemand inzet en welk resultaat deze hebben voor zichzelf en anderen. Daarnaast merk je op hoe de context en de gekozen referentiekaders het dagelijks handelen beïnvloeden.
+        Meer uitleg over het gebruik van deze formulieren is terug te vinden in hoofdstuk 24 van het boek 'Grondslagen van de ergotherapie' (Van Hartingsveldt, M. Kos, D. le Granse, M., 2023).
+    </p>
+</section>

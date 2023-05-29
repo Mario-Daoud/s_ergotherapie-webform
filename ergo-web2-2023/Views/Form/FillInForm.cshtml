@@ -1,0 +1,176 @@
+@model IEnumerable<ergo_web2_2023.ViewModels.FormGroupVM>
+
+
+@{
+    ViewData["Title"] = "Fill in form";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+<hr />
+<div>
+
+    <form asp-action="CreateDocument" asp-route-id=@ViewBag.Id asp-controller="Form" method="get">
+        <div>
+            @foreach (var formGroup in Model)
+            {
+                if (formGroup.Questions.Count() != 0)
+                {
+                    if (formGroup.OptionId == null)
+                    {
+                        <table class="question_table">
+
+                            <tr>
+                                <th class="question_title" colspan="2">
+                                    Stap
+
+                                    @Html.DisplayFor(modelItem => formGroup.GroupOrder)
+                                    @Html.DisplayFor(modelItem => formGroup.Title)
+
+                                </th>
+                            </tr>
+                            @foreach (var question in formGroup.Questions)
+                            {
+                                if (!question.IsSubquestion)
+                                {
+
+
+                                    <tr>
+                                        <td class="question_field">
+                                            <div class="description_field">
+                                                <h6>@Html.DisplayFor(modelItem => question.Title)</h6>
+                                                @Html.DisplayFor(modelItem => question.Description)
+                                            </div>
+                                            @if (question.Hint != null)
+                                            {
+                                                <div class="description_field hint">
+                                                    <img src="~/images/tooltip_icon.png" class="hint_image">
+                                                    <span class="hint_text">@Html.DisplayFor(modelItem => question.Hint)</span>
+                                                </div>
+                                            }
+
+                                            <div class="">
+                                                @foreach (var option in question.QuestionOptions)
+                                                {
+
+                                                    <div class="">
+                                                        <label>
+                                                            <input type="checkbox" class="checkbox" name="option" value="@option.OptionId" id="cb_@option.OptionId.ToString().@option.QuestionId" />
+                                                            @Html.DisplayFor(modelItem => option.OptionText)
+                                                        </label>
+                                                    </div>
+
+                                                }
+                                            </div>
+
+                                        </td>
+                                        <td class="textarea_field">
+                                            <textarea></textarea>
+                                        </td>
+                                    </tr>
+                                }
+
+                            }
+                        </table>
+                    }
+                    else
+                    {
+                        <table class="question_table" id="sq_@formGroup.OptionId.ToString().@formGroup.SuperQuestionId.ToString()" style="display: none">
+
+                            <tr>
+                                <th class="question_title" colspan="2">
+                                    Stap
+                                    @Html.DisplayFor(modelItem => formGroup.GroupOrder)
+                                    @Html.DisplayFor(modelItem => formGroup.Title)
+                                </th>
+                            </tr>
+
+                            @foreach (var question in formGroup.Questions)
+                            {
+
+
+
+
+                                <tr>
+                                    <td class="question_field">
+                                        <div class="description_field">
+                                            <h6>@Html.DisplayFor(modelItem => question.Title)</h6>
+                                            @Html.DisplayFor(modelItem => question.Description)
+                                        </div>
+                                        @if (question.Hint != null)
+                                        {
+                                            <div class="description_field hint">
+                                                <img src="~/images/tooltip_icon.png" class="hint_image">
+                                                <span class="hint_text">@Html.DisplayFor(modelItem => question.Hint)</span>
+                                            </div>
+                                        }
+                                        <div class="">
+                                            @foreach (var option in question.QuestionOptions)
+                                            {
+
+                                                <div class="">
+                                                    <label>
+                                                        <input type="checkbox" class="checkbox" name="option" value="@option.OptionId" id="cb_@option.OptionId.ToString()_@option.QuestionId" />
+                                                        @Html.DisplayFor(modelItem => option.OptionText)
+                                                    </label>
+                                                </div>
+
+                                            }
+                                        </div>
+                                    </td>
+                                    <td class="textarea_field">
+                                        <textarea></textarea>
+                                    </td>
+                                </tr>
+
+
+                            }
+                        </table>
+                    }
+
+                }
+
+
+            }
+
+            @foreach (var formGroup in Model)
+            {
+
+
+            }
+
+        </div>
+        <div class="text-center mb-5">
+            <input type="submit" id="btn_export" class="btn-primary" value="Exporteer naar Word" />
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+
+        let checkBoxElements = document.getElementsByClassName('checkbox');
+        for (let i = 0; i < checkBoxElements.length; i++) {
+
+            checkBoxElements[i].addEventListener('click', () => {
+                console.log("checkbox id's: " + checkBoxElements[i].id)
+                var optionIdSubString = checkBoxElements[i].id.substring(3)
+                var subquestion = document.getElementById("sq_" + optionIdSubString);
+                // console.log(subquestion.innerHTML);
+
+                // for(let i = 0; i < subquestions.length; i++) {
+                if (subquestion.style.display == "none") {
+                    subquestion.style.display = "";
+                }
+                else {
+                    subquestion.style.display = "none";
+                }
+                // }
+
+            })
+        }
+    </script>
+    }

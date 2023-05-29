@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>aspnet-ergo_web2_2023-CBD97E8A-2D23-481A-8CD0-0F62A2B324F7</UserSecretsId>
+        <RootNamespace>ergo_web2_2023</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.9" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.15" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.15" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="2.2.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.15" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.15">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+        <PackageReference Include="SendGrid" Version="9.28.1" />
+        <PackageReference Include="Syncfusion.DocIO.AspNet.Mvc5" Version="21.2.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Areas\Administrator\Data\" />
+      <Folder Include="Areas\Administrator\Models\" />
+      <Folder Include="Data\Migrations\" />
+      <Folder Include="Doc\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="wwwroot\images\LogoVIVES.png" />
+      <None Include="wwwroot\images\LogoZUYD.png" />
+      <None Include="wwwroot\images\moon.png" />
+      <None Include="wwwroot\images\sun.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ergo-web2-2023.Models\ergo-web2-2023.Models.csproj" />
+      <ProjectReference Include="..\ergo-web2-2023.Services\ergo-web2-2023.Services.csproj" />
+    </ItemGroup>
+
+</Project>

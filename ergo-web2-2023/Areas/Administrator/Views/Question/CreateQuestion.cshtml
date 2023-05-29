@@ -1,0 +1,61 @@
+﻿@model ergo_web2_2023.Areas.Administrator.ViewModels.QuestionVM
+@using ergo_web2_2023.Models.Enums;
+<link rel="stylesheet" href="~/css/editAndCreate.css">
+
+@{
+    ViewData["Title"] = "CreateQuestion";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+    var questionTypes = Enum.GetValues(typeof(QuestionType)).Cast<QuestionType>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() });
+}
+
+<div class="container align-content-center">
+    <h1>New Question</h1>
+
+    <br />
+    <div class="scrollable-container">
+        <div class="row container-row">
+            <div class="col-4"></div>
+            <div class="col-md-4">
+                <form asp-action="CreateQuestion">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label asp-for="Type" class="control-label"></label>
+                        <select asp-for="Type" class="form-control" asp-items="questionTypes"></select>
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label asp-for="Hint" class="control-label"></label>
+                        <input asp-for="Hint" class="form-control" />
+                        <span asp-validation-for="Hint" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

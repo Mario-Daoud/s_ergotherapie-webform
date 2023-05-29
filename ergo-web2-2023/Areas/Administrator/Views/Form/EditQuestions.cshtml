@@ -1,0 +1,182 @@
+﻿@using ergo_web2_2023.Areas.Administrator.ViewModels;
+@model IEnumerable<ergo_web2_2023.Areas.Administrator.ViewModels.FormQuestionVM>
+<link rel="stylesheet" href="~/css/editAndCreate.css">
+<link rel="stylesheet" href="~/css/editQuestions.css">
+
+@{
+    ViewData["Title"] = "EditQuestions";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+    var groups = ViewBag.Groups as List<FormGroupVM>;
+}
+
+
+<h1 style="display:flex; justify-content: center; margin-top: 25px;">
+    Change Form Questions
+</h1>
+
+<br />
+
+<div id="refresh" class="row pageRow">
+    <div class="col-md-12 col-lg-4 ">
+        <a asp-controller="Question" asp-action="CreateQuestion" class="createButton btn btn-primary">Create New Question</a>
+        <div class="select-questions">
+            @foreach (var question in ViewBag.Questions)
+            {
+                if (!ViewBag.UsedIDs.Contains(question.QuestionId))
+                {
+                    <div class="option">
+                        <div class="listItem option-text">
+                            <h5 class="card-title listItem mb-1">@question.Title</h5>
+                            @if (question.Description != null)
+                            {
+                                <p class="listItem txtQuestionOverflow">Desc.: @question.Description</p>
+                            }
+                        </div>
+                        <div class="option-delete" onclick="addQuestion(@question.QuestionId)">
+                            <span class="plus">+</span>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-8">
+        <h2>Questions In Form</h2>
+        <div class="list-questions">
+            @foreach (var item in Model)
+            {
+                <div class="option">
+                    <div class="listItem option-text">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </div>
+                    <div class="option-delete">
+                        <a style="cursor: pointer;" class="delete" onclick="deleteQuestion(@item.QuestionId, @item.FormId)"><img height="30px" src="~/images/delete.png" /></a> |
+                        <a style="cursor: pointer;" class="delete" onclick="moveUp(@item.QuestionId, @item.FormId)"><img height="30px" src="~/images/arrow-up.png" /></a> |
+                        <a style="cursor: pointer;" class="delete" onclick="moveDown(@item.QuestionId, @item.FormId)"><img height="30px" src="~/images/arrow-down.png" /></a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    var groups = JSON.parse(`@Json.Serialize(groups)`);
+    var currentQid = null;
+</script>
+
+<script>
+    function addQuestion(qid) {
+        currentQid = qid;
+        askGroupId();
+    }
+
+    function askGroupId() {
+        const popup = document.createElement("div");
+        popup.setAttribute("class", "cardItem");
+        popup.setAttribute("id", "popup");
+        popup.setAttribute("style", "width: 500px; height: 200px; z-index: 9999; position: absolute; top: 0; left: 0; right: 0; bottom: 0; align-items: center; justify-content: center; margin: auto; background-color: white");
+        const h5 = document.createElement("h5");
+        h5.innerText = "In which group would you like to put the question?";
+        popup.appendChild(h5);
+        popup.appendChild(document.createElement("br"));
+        const input = document.createElement("select");
+        input.setAttribute("style", "width: 50%;");
+        for (let i = 0; i < groups.length; i++) {
+            const option = document.createElement("option");
+            option.setAttribute("value", groups[i].groupId)
+            option.innerText = groups[i].title;
+            input.appendChild(option);
+        }
+        popup.appendChild(input);
+        input.setAttribute("style", "margin-bottom: 10px");
+        popup.appendChild(document.createElement("br"));
+        const cancelBtn = document.createElement("button");
+        cancelBtn.setAttribute("style", "margin-right: 10px");
+        const confirmBtn = document.createElement("button");
+        cancelBtn.innerText = "Cancel";
+        confirmBtn.innerText = "Confirm";
+        cancelBtn.setAttribute("onclick", "removePopup()");
+        confirmBtn.setAttribute("onclick", "confirmPopup()");
+        popup.appendChild(cancelBtn);
+        popup.appendChild(confirmBtn);
+        document.getElementsByTagName("body")[0].appendChild(popup);
+    }
+
+    function removePopup() {
+        document.getElementById("popup").remove();
+    }
+
+    function confirmPopup() {
+        let gid = document.getElementById("popup").children[2].value;
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("InsertLast", "Form")' + '?fid=' + @ViewBag.Id + '&qid=' + currentQid + '&gid=' + gid,
+            success: function () {
+                currentQid = null;
+                removePopup();
+                refresh();
+            },
+            error: function () {
+                console.error('Error occurred while calling InsertLast() action.');
+            }
+        });
+    }
+
+    function deleteQuestion(qid, fid) {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("DeleteQuestionFromForm", "Form")' + '?qid=' + qid + '&fid=' + fid,
+            success: function () {
+                refresh();
+            },
+            error: function () {
+                console.error('Error occurred while calling DeleteQuestionFromForm() action.');
+            }
+        });
+        refresh();
+    }
+
+    function moveUp(qid, fid) {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.ActionLink("SwitchQuestionUp", "Form")',
+            data: { qidN: qid, fidN: fid },
+            success: function () {
+                refresh();
+            },
+            error: function () {
+                console.error('Error occurred while calling SwitchQuestionUp() action.');
+            }
+        });
+    }
+
+    function moveDown(qid, fid) {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.ActionLink("SwitchQuestionDown", "Form")',
+            data: { qidN: qid, fidN: fid },
+            success: function () {
+                refresh();
+            },
+            error: function () {
+                console.error('Error occurred while calling SwitchQuestionDown() action.');
+            }
+        });
+    }
+</script>
+<script>
+    function refresh() {
+        $.ajax({
+            url: '/Administrator/Form/EditQuestions',
+            type: 'GET',
+            data: { id: @ViewBag.Id },
+            success: function (result) {
+                var placeholder = document.createElement('div');
+                placeholder.innerHTML = result;
+                var res = placeholder.querySelector('div#refresh');
+                $('#refresh').html(res.innerHTML);
+            }
+        });
+    }
+</script>

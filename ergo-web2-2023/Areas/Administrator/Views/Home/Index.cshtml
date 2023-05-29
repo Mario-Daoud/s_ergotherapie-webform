@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<div id="quick-actions">
+    <h3>Quick Actions</h3>
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-3 mb-2" onclick="location.href='@Url.Action("CreateForm", "Form", new { area = "Administrator" })';" style="cursor: pointer;">
+            <div class="card text-center">
+                <div class="card-body fw-bold">
+                    <p>
+                        <h3 class="plus">+</h3>
+                        <span>Create Form</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 mb-2" onclick="location.href='@Url.Action("CreateFormGroup", "FormGroup", new { area = "Administrator" })';" style="cursor: pointer;">
+            <div class="card text-center">
+                <div class="card-body fw-bold">
+                    <p>
+                        <h3 class="plus">+</h3>
+                        <span>Create Form Group</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 mb-2" onclick="location.href='@Url.Action("CreateQuestion", "Question", new { area = "Administrator" })';" style="cursor: pointer;">
+            <div class="card text-center">
+                <div class="card-body fw-bold">
+                    <p>
+                        <h3 class="plus">+</h3>
+                        <span>Create Question</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 mb-2" onclick="location.href='@Url.Action("CreateSubquestion", "Subquestion", new { area = "Administrator" })';" style="cursor: pointer;">
+            <div class="card text-center">
+                <div class="card-body fw-bold">
+                    <p>
+                        <h3 class="plus">+</h3>
+                        <span>Create Subquestion</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="content">
+
+</div>

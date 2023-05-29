@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ergo_web2_2023.Areas.Administrator.ViewModels.ApplicationUserVM>
+
+@{
+    ViewData["Title"] = "ListAllAdministrators";
+    Layout = "~/Areas/Administrator/Views/Shared/_LayoutAdministrator.cshtml";
+}
+
+<h1>All Administrators</h1>
+
+<hr/>
+
+<p>
+    <a asp-action="Create">Add Administrator</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="listItem">
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th class="listItem">
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th class="listItem">
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="listItem">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td class="listItem">
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+
+                <td class="listItem">
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

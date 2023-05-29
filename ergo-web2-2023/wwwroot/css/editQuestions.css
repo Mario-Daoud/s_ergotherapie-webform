@@ -1,0 +1,48 @@
+﻿.addQuestionToFormContainer:first-child {
+    position: relative;
+}
+
+.createButton {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+td {
+    color: black;
+    font-weight: 500;
+    border-color: gray;
+}
+
+#left-bar-background {
+    background-color: #f2f1ef;
+}
+
+.btn-primary {
+    background-color: red;
+    border: none;
+    color: white;
+}
+
+.pageRow {
+    padding: 25px;
+}
+
+.select-questions, .list-questions {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.select-questions {
+    max-height: calc(100vh - 185px);
+}
+
+.list-questions {
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.plus {
+    font-weight: 900;
+    font-size: 30px;
+}

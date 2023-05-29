@@ -1,0 +1,25 @@
+﻿@using ergo_web2_2023.Areas.Administrator.ViewModels
+@model IEnumerable<ergo_web2_2023.Areas.Administrator.ViewModels.FormVM>
+
+@{
+    ViewData["Title"] = "Forms";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    Layout = "~/Areas/Administrator/Views/Shared/_LayoutAdministrator.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/chooseForms.css"/>
+</head>
+
+<section class="forms">
+         <h1>Formulieren</h1>
+        <div class="form-grid">
+            @foreach (var form in Model)
+            {
+                @await Html.PartialAsync("~/Views/Shared/DisplayTemplates/_FormCard.cshtml", form)
+            }
+        </div>
+</section>

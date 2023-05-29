@@ -1,0 +1,279 @@
+﻿body {
+    overflow: hidden;
+    padding: 0;
+    margin: 0 auto;
+    background-color: #f2f1ef !important;
+}
+
+#left-bar-container {
+    position: relative;
+    padding: 0;
+}
+
+#left-bar {
+    background-color: white !important;
+    height: 100vh;
+    border-radius: 0 25px 25px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 50px;
+    padding-right: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+#left-bar-background {
+    position: absolute;
+    width: 100%;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    height: 50%;
+    background-color: #d2d1cf;
+}
+
+#logo {
+    margin-top: 70px;
+    height: 80px;
+}
+
+#pfp {
+    height: 90px;
+    margin-top: 35px;
+    border-radius: 60px;
+    border: 1px solid black;
+}
+
+#images-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#username {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.btn {
+    flex: 1 1 auto;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#btn-list {
+    width: 85%;
+    padding-bottom: 35%;
+    margin-left: 10%;
+    margin-top: 10px;
+}
+
+#btn-list .btn {
+    width: 100%;
+    font-weight: 300;
+    color: black;
+    font-size: 1.1em;
+    background-color: #f2f1ef;
+    border-radius: 8px;
+    margin-bottom: 7px;
+}
+
+#btn-conainer.scrollable {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+
+    #btn-conainer.scrollable::-webkit-scrollbar {
+        width: 5px;
+        background-color: transparent;
+    }
+
+    #btn-conainer.scrollable::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+    }
+
+        #btn-conainer.scrollable::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+    #btn-conainer.scrollable::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    #btn-conainer.scrollable::-webkit-scrollbar-thumb:vertical {
+        border-radius: 5px 0 0 5px;
+    }
+
+#homepage-btn {
+    width: 85%;
+    font-weight: 300;
+    border: none;
+    border-radius: 8px;
+    margin-left: 10%;
+    background-color: #f2f1ef;
+    color: black;
+    margin-bottom: 7px;
+    min-height: 40px;
+}
+
+#logout-btn {
+    width: 85%;
+    border: none;
+    border-radius: 8px;
+    margin-left: 10%;
+    background-color: red;
+    color: white;
+    margin-bottom: 20px;
+    padding-top: 11px;
+}
+
+.col-9 {
+    padding: 0 !important;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+/*outside layout page*/
+
+#quick-actions {
+    flex: 0 0 auto;
+    width: 100%;
+    background-color: #d2d1cf;
+    box-sizing: border-box;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.card {
+    border-radius: 25px;
+}
+
+.content-card {
+    text-align: left !important;
+    padding: 15px
+}
+
+.card-body {
+    padding: 0;
+}
+
+h3 {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.plus {
+    margin: 0;
+    font-size: 2em;
+}
+
+.description {
+    color: #82817f;
+}
+
+.description-title {
+    margin: 0;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-evenly;
+    border-radius: 15px;
+    background-color: #f2f1ef;
+    padding: 8px;
+    color: #82817f;
+}
+
+.actions a {
+    text-decoration: none;
+    color: #82817f;
+}
+
+#content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 40px;
+    overflow-y: hidden;
+    height: calc(100vh - 205px);
+}
+
+.content-cards {
+    overflow-y: auto;
+}
+
+.formtitle, .grouptitle, .groupOrder, .description-title, .description {
+    padding-left: 10px;
+}
+
+
+/* responsive */
+
+@media (max-width: 767px) {
+    #left-bar-container {
+        display: none;
+    }
+
+    #dropdown-btn {
+        display: block;
+    }
+
+    #btn-list {
+        display: none;
+    }
+
+    #dropdown-list {
+        display: none;
+    }
+
+    #dropdown-btn:focus + #dropdown-list,
+    #dropdown-btn:hover + #dropdown-list {
+        display: block;
+    }
+
+    #dropdown-list {
+        display: flex;
+        justify-content: space-between;
+        width: 100vw;
+    }
+
+    #dropdown-btn {
+        text-align: center;
+    }
+
+    .renderBody {
+        margin-top: 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    #left-bar-container {
+        display: block;
+    }
+
+    #dropdown-btn {
+        display: none;
+    }
+
+    #btn-list {
+        display: block;
+    }
+
+    #dropdown-list {
+        display: none;
+    }
+
+    .renderBody  {
+        padding: 0;
+    }
+}
+

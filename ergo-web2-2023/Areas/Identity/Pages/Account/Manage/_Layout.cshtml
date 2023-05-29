@@ -1,0 +1,48 @@
+﻿@{
+        Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<style>
+    #page {
+        margin: 50px;
+        margin-top: 15%;
+    }
+    h1 {
+        text-align: center;
+        padding-bottom: 20px;
+        margin-bottom: 70px;
+    }
+    h4 {
+        text-align: center;
+    }
+
+    #left-bar-background {
+        background-color: #f2f1ef;
+    }
+
+    .mgmtTab {
+        padding-bottom: 10px;
+    }
+</style>
+
+<div id="page">
+    <div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-3 mgmtTab">
+                <h4>Management</h4>
+                <hr/>
+                <partial name="_ManageNav" />
+            </div>
+            <div class="col-md-5">
+                @RenderBody()
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

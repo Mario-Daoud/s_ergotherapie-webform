@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "ergo-web2-2023.Models": {
+      "commandName": "Project"
+    },
+    "Profile 1": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\elsla\\OneDrive\\Documents\\Classes\\Project ERGO\\ergo-web2-2023.sln"
+    }
+  }
+}

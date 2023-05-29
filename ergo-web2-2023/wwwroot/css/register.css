@@ -1,0 +1,120 @@
+﻿body {
+    background-color: #f2f1ef !important;
+}
+
+.gen-container {
+    padding-top: 2%;
+}
+
+.register-container, .form-floating {
+    font-family: "Century Gothic", sans-serif;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+
+.logo-container {
+    margin: 25px 25px 50px 25px;
+}
+
+.logo-container, .forgot-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-container img {
+    width: auto;
+    height: 80px;
+}
+
+.card {
+    background-color: #fff;
+    border: none;
+    border-radius: 15px;
+    padding: 25px;
+    width: 25%;
+}
+
+@media (max-width: 767px) {
+    .card {
+        width: 80%;
+    }
+}
+
+.register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.register-container p {
+    letter-spacing: 1px;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    height: 545px;
+    position: relative;
+}
+
+span {
+    font-size: 0.9em;
+    margin: 0;
+    padding: 0;
+}
+
+#register-submit {
+    width: 100%;
+    border-radius: 10px;
+}
+
+#already-account {
+    text-align: center;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    margin-left: 5px;
+}
+
+.form-control {
+    border: none;
+    background-color: #f2f1ef;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.form-group {
+    margin-bottom: 0.5rem;
+}
+
+label {
+    font-weight: bold;
+}
+
+#register-button {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+}
+
+#forgot {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+}
+
+#register-submit {
+    font-size: 15px;
+    height: 50px;
+}

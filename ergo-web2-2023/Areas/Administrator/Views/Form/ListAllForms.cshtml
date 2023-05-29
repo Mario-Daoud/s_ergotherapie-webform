@@ -1,0 +1,54 @@
+@model IEnumerable<ergo_web2_2023.Areas.Administrator.ViewModels.FormVM>
+
+@{
+    ViewData["Title"] = "Forms List";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<div id="quick-actions">
+    <h3>Quick Actions</h3>
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-3 mb-2" onclick="location.href='@Url.Action("CreateForm", "Form", new { area = "Administrator" })';" style="cursor: pointer;">
+            <div class="card text-center">
+                <div class="card-body fw-bold">
+                    <p>
+                        <h3 class="plus">+</h3>
+                        <span>Create Form</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="content">
+    <div class="content-title">
+        <h3>All Forms</h3>
+    </div>
+    <div class="row content-cards">
+        @foreach (var item in Model)
+        {
+            <div class="col-12 col-md-6 col-lg-3 mb-2">
+                <div class="card content-card">
+                    <div class="card-body">
+                        <h5 class="formtitle">@Html.DisplayFor(modelItem => item.Title)</h5>
+                        <p class="description-title"></p>
+                        @if (item.Description == null)
+                        {
+                            <p class="description">No Description</p>
+                        }
+                        else
+                        {
+                            <p class="description">Desc.: @Html.DisplayFor(modelItem => item.Description)</p>
+                        }
+                    </div>
+                    <div class="actions">
+                        <a asp-action="EditForm" asp-route-id="@item.FormId"><img height="30px" src="~/images/edit.png" /></a> |
+                        <a asp-action="EditQuestions" asp-route-id="@item.FormId"><img height="30px" src="~/images/description.png" /></a> |
+                        <a asp-action="Delete" asp-route-id="@item.FormId"><img height="30px" src="~/images/delete.png" /></a> 
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
