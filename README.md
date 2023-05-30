@@ -1,6 +1,7 @@
 # Ergotherapy Web Forms
 ASP.NET solution made to simplify the creation and utilisation of forms that get used at the occupational therapy department.
 
+## Site Preview
 ### Landing Page
 <img src="https://github.com/Mario-Daoud/ergotherapie-webform/assets/113902874/e4bfb114-4741-4b5e-8b42-4ecd05f76e48" width="800px" height="auto">
 <img src="https://github.com/Mario-Daoud/ergotherapie-webform/assets/113902874/0fa38103-9ceb-4d4d-a503-ea20c090ca66" width="800px" height="auto">
