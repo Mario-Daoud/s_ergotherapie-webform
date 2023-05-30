@@ -2,7 +2,7 @@
 ASP.NET solution made to simplify the creation and utilisation of forms that get used at the occupational therapy department.
 
 ## Site Preview
-  - [Landing Page] (#Landing-Page)
+  - [Landing Page] (#landing-page)
   - [Forms] (#Forms)
     - [Forms Overview] (#Forms-Overview)
     - [Fill In Form] (#Fill-In-Form)
