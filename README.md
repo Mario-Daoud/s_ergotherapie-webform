@@ -1,6 +1,5 @@
 # Ergotherapy Web Forms
 <p>ASP.NET solution made to simplify the creation and utilisation of forms that get used at the occupational therapy department.</p>
-<p>This project is hosted on a linux server</p>
 
 ## Site Preview
 ### Landing Page
